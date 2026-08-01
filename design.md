@@ -1,42 +1,46 @@
-# Design — Castello di Vino
+# Design — Collisioni ETS
 
 ## Concept
-Eleganza italiana. Notte al castello. Vino come arte.
-Ispirato al template dark/professional con layout asimmetrico e hero bold.
+"Collisioni" = l'incontro. Dove persone, idee e luoghi si incontrano nasce cultura.
+Identità editoriale, calda e mediterranea, costruita attorno al simbolo dell'ente: **il gabbiano**.
+La cifra visiva è la *collisione* tra un colore caldo (corallo/terracotta, il sole di Sicilia) e uno freddo
+(teal, il mar Tirreno) che si fondono in un gradiente.
 
 ## Colors
-- Background: `#0c0c0c`
-- Surface: `#141414`, `#1a1a1a`
-- Gold accent: `#c9a84c`
-- Gold light: `#e8c96a`
-- Text primary: `#f0ead6`
-- Text muted: `#8a8070`
-- Border: `rgba(201,168,76,0.2)`
+- Paper (bg): `#f6f2ea` · `#efe9dd`
+- Ink (testo): `#17202a` · soft `#3d4753` · muted `#6b7480`
+- Corallo (caldo): `#e2593f`
+- Sea/teal (freddo): `#1f7a8c`
+- Gold (accento): `#e0a43b`
+- Night (sezioni scure): `#101a22` · `#14232d`
+- Collision gradient: `corallo → gold → sea`
 
 ## Typography
-- Display/Headings: **Playfair Display** (serif, elegante, italiano)
-- Body/UI: **Poppins** (clean, leggibile)
-- Sizes: hero 5xl–7xl, section 3xl–4xl, body base–lg
+- Display/Headings: **Fraunces** (serif contemporaneo, opsz)
+- Body/UI: **Inter**
 
 ## Layout
-- Full-width hero con overlay scuro su immagine castello
-- Sezioni alternate dark/più scuro
-- Card con bordi dorati sottili
-- Grid asimmetrico per programma/espositori
-- Max-width 1200px, padding generoso
+- Sfondo carta chiaro, sezioni alternate paper / paper-2 / night
+- Container max 1180px, ritmo di sezione generoso (6–7.5rem)
+- Card bianche con bordo sottile e hover sollevato
+- Gabbiani fluttuanti come motivo grafico ricorrente (SVG)
 
 ## Motion
-- Fade-in staggerato al caricamento pagina
-- Hover su card: gold border glow
-- Smooth scroll
+- Reveal on scroll (IntersectionObserver) con fade-up staggerato
+- Gabbiani in float/drift
+- Navbar che si vela in blur allo scroll
 
 ## Sections
-1. **Navbar** — logo + nav links + CTA ticket
-2. **Hero** — date, titolo, castello, CTA
-3. **Mission** — 3 pillar cards
-4. **About** — descrizione estesa evento
-5. **Espositori** — card grid cantine/produttori
-6. **Programma** — timeline per giorno (12-14 Apr, 9-11 Mag)
-7. **Ticket** — pricing tiers
-8. **Contatti** — form + info
-9. **Footer**
+1. **Navbar** — logo gabbiano + nav + CTA Sostieni
+2. **Hero** — claim "Dove le persone, le idee e i luoghi si incontrano"
+3. **Stats** — numeri chiave (fascia scura)
+4. **Chi siamo** — mission + 3 pilastri (Custodire / Creare / Connettere)
+5. **Ambiti** — 8 settori statutari con icone
+6. **Progetti** — Presepe Vivente, Carnevale Rinascimentale, Centro Anziani Attivi
+7. **Rete** — collaborazioni e partner (fascia scura)
+8. **Contatti** — info + form
+9. **Footer** — anagrafica ente (CF, RUNTS, sede)
+
+## Dati istituzionali (reali)
+- Collisioni ETS — C.F. 97384650822 — RUNTS Rep. n. 144409 sez. g)
+- Via Cangialosi 119, 90044 Carini (PA) — costituita 09/10/2024

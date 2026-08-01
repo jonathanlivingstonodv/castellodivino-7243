@@ -1,8 +1,8 @@
 {
     "id": "website",
-    "name": "Runable",
-    "description": "A template for building a React application with Vite, Hono, and Cloudflare Workers",
-    "url": "https://example.com",
+    "name": "Collisioni ETS",
+    "description": "Sito dell'associazione culturale Collisioni ETS di Carini (PA): cultura, patrimonio, comunità.",
+    "url": "https://www.collisioniets.it",
     "hostname": "xyz.runable.site",
     "port": 8080
 }
