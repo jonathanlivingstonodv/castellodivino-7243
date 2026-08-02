@@ -1,0 +1,8 @@
+{
+    "id": "website",
+    "name": "Collisioni ETS",
+    "description": "Sito dell'associazione culturale Collisioni ETS di Carini (PA): cultura, patrimonio, comunità.",
+    "url": "https://www.collisioniets.it",
+    "hostname": "xyz.runable.site",
+    "port": 8080
+}
