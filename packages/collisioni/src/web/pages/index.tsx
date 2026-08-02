@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from 
 import {
   Landmark, Palette, GraduationCap, HeartHandshake, Compass, Scale,
   Users, Trophy, MapPin, ArrowRight, ArrowUpRight, Menu, X,
-  Sparkles, Feather, Building2, Globe2, Check, ChevronDown,
+  Sparkles, Building2, Globe2, Check, ChevronDown,
 } from "lucide-react";
 
 /* ================================================================= */
@@ -19,12 +19,26 @@ const MEDIA = {
 
 type Tone = "warm" | "sea" | "gold" | "night";
 
-/* Brand mark — il gabbiano */
-function Gull({ className = "", stroke = "currentColor", style }: { className?: string; stroke?: string; style?: CSSProperties }) {
+/* Marchio ufficiale: la sfera colorata (i colori che collidono) */
+function Orb({ size = 28, className = "", style }: { size?: number | string; className?: string; style?: CSSProperties }) {
+  const dim = typeof size === "number" ? `${size}px` : size;
+  return <span className={`orb ${className}`} style={{ width: dim, height: dim, ...style }} aria-hidden="true" />;
+}
+
+/* Logo ufficiale: wordmark COLLISIONI con la "O" a sfera */
+function Logo({ dark = false }: { dark?: boolean }) {
+  const color = dark ? "#ffffff" : "#3f4245";
   return (
-    <svg viewBox="0 0 120 70" className={className} style={style} fill="none" aria-hidden="true">
-      <path d="M6 46C30 44 46 34 58 12c1.2-2.2 3.4-2.2 4.6 0C74.6 34 90 44 114 46 90 47.4 74 55 62 74 50 55 34 47.4 6 46Z" fill={stroke} />
-    </svg>
+    <a href="#top" className="flex items-center select-none" aria-label="Collisioni ETS — home">
+      <span className="leading-none">
+        <span className="logo-word" style={{ fontSize: "1.4rem", color }}>
+          C<Orb size="0.9em" />LLISIONI
+        </span>
+        <span className="block" style={{ fontSize: "0.6rem", letterSpacing: "0.36em", fontWeight: 600, marginTop: 3, marginLeft: 1, color: dark ? "rgba(255,255,255,0.7)" : "var(--sea)" }}>
+          ETS · CARINI
+        </span>
+      </span>
+    </a>
   );
 }
 
@@ -36,23 +50,9 @@ function Img({ src, alt, tone = "night", className = "", label }: { src?: string
   }
   return (
     <div className={`ph ph--${tone} media-cover ${className}`} role="img" aria-label={alt}>
-      <Gull className="ph__gull gull-float" />
+      <Orb size={110} className="gull-float" style={{ opacity: 0.22, boxShadow: "none" }} />
       <span className="ph__tag">{label ?? "Foto Collisioni"}</span>
     </div>
-  );
-}
-
-function Logo({ dark = false }: { dark?: boolean }) {
-  return (
-    <a href="#top" className="flex items-center gap-2.5 select-none" aria-label="Collisioni ETS — home">
-      <span className="grid place-items-center rounded-xl" style={{ width: 40, height: 40, background: dark ? "rgba(255,255,255,0.14)" : "#101a22", backdropFilter: dark ? "blur(4px)" : undefined }}>
-        <Gull className="w-6" stroke={dark ? "#fff" : "#f6f2ea"} />
-      </span>
-      <span className="leading-none">
-        <span className="font-display block" style={{ fontWeight: 700, fontSize: "1.15rem", letterSpacing: "0.01em", color: dark ? "#fff" : "var(--ink)" }}>Collisioni</span>
-        <span className="block" style={{ fontSize: "0.62rem", letterSpacing: "0.34em", fontWeight: 600, color: dark ? "rgba(255,255,255,0.72)" : "var(--sea)" }}>ETS · CARINI</span>
-      </span>
-    </a>
   );
 }
 
@@ -128,7 +128,8 @@ function Hero() {
         <Img src={MEDIA.hero} alt="Il Castello di Carini e le attività di Collisioni ETS" tone="night" label="Foto hero" />
       </div>
       <div className="scrim-hero" />
-      <Gull className="w-20 absolute opacity-20 gull-drift" style={{ top: "22%", right: "10%", color: "#fff", zIndex: 2 }} />
+      <Orb size={96} className="absolute orb--spin gull-drift" style={{ top: 104, right: "6%", zIndex: 2, opacity: 0.5, filter: "blur(2px)" }} />
+      <Orb size={40} className="absolute gull-float" style={{ bottom: 96, left: "7%", zIndex: 2, opacity: 0.4, filter: "blur(1px)" }} />
 
       <div className="container-x relative" style={{ zIndex: 3, paddingBottom: 92, paddingTop: 120 }}>
         <Reveal>
@@ -170,9 +171,7 @@ function Marquee() {
     <div id="intro" className="marquee py-6" style={{ borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", background: "var(--paper)" }}>
       <div className="marquee__track">
         {items.map((w, i) => (
-          <span key={i} className="marquee__item">
-            <Gull className="w-7" stroke="var(--coral)" /> {w}
-          </span>
+          <span key={i} className="marquee__item"><Orb size={18} /> {w}</span>
         ))}
       </div>
     </div>
@@ -194,7 +193,7 @@ function ChiSiamo() {
             <Img src={MEDIA.comunita} alt="La comunità di Collisioni ETS" tone="sea" label="Foto comunità" />
             <div className="scrim-bottom" />
             <div className="ov-caption">
-              <div className="flex items-center gap-2 text-sm on-photo"><Feather size={18} /> Il nostro simbolo è il gabbiano: libertà e orizzonti aperti.</div>
+              <div className="flex items-center gap-2 text-sm on-photo"><Orb size={20} /> Il nostro nome è la nostra idea: l'incontro che genera cultura.</div>
             </div>
           </div>
         </Reveal>
@@ -317,7 +316,7 @@ function Band() {
       <div className="scrim-hero" />
       <div className="container-x relative" style={{ zIndex: 3, paddingTop: 80, paddingBottom: 80 }}>
         <Reveal>
-          <Gull className="w-12 mb-6" stroke="rgba(255,255,255,0.85)" />
+          <Orb size={54} className="mb-6 orb--spin" />
           <p className="font-display on-photo" style={{ color: "#fff", fontWeight: 500, fontStyle: "italic", fontSize: "clamp(1.6rem,3.6vw,2.8rem)", lineHeight: 1.25, maxWidth: "22ch" }}>
             «Ogni incontro è una piccola, felice collisione.»
           </p>

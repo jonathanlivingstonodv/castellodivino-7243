@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -253,5 +253,30 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; animation: none !important; }
-  .gull-float, .gull-drift, .marquee__track, .scroll-cue { animation: none !important; }
+  .gull-float, .gull-drift, .marquee__track, .scroll-cue, .orb--spin { animation: none !important; }
 }
+
+/* ================================================================= */
+/*  LOGO UFFICIALE — wordmark COLLISIONI con "O" a sfera colorata     */
+/* ================================================================= */
+.orb {
+  display: inline-block; border-radius: 50%; position: relative; flex: none;
+  background: conic-gradient(from 205deg at 50% 48%,
+    #f6b03a 0%, #ef7a2a 12%, #e5482c 26%, #d5327e 40%,
+    #7b3ff2 54%, #2f7fd6 66%, #23b2a6 80%, #eac63f 92%, #f6b03a 100%);
+  box-shadow: inset -2px -3px 7px rgba(0,0,0,0.38), inset 2px 3px 7px rgba(255,255,255,0.28);
+}
+.orb::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(42% 36% at 33% 27%, rgba(255,255,255,0.9), rgba(255,255,255,0) 62%);
+}
+.orb--spin { animation: orbspin 18s linear infinite; }
+@keyframes orbspin { to { transform: rotate(360deg); } }
+
+.logo-word {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 600; letter-spacing: 0.02em; line-height: 1;
+  display: inline-flex; align-items: center; text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo-word .orb { margin: 0 0.01em; vertical-align: middle; }
