@@ -218,7 +218,7 @@ body {
 }
 
 /* Bento grid */
-.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; grid-auto-flow: row dense; }
 .bento > * { min-height: 240px; }
 .b-3 { grid-column: span 3; }
 .b-2 { grid-column: span 2; }

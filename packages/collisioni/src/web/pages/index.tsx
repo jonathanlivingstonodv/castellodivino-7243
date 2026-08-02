@@ -12,7 +12,9 @@ const MEDIA = {
   hero: "/media/hero.jpg",
   comunita: "/media/comunita.jpg",
   presepe: "/media/presepe.jpg",
+  calici: "/media/calici.jpg",
   carnevale: "/media/carnevale.jpg",
+  castellodivino: "/media/castellodivino.jpg",
   anziani: "/media/anziani.jpg",
   castello: "/media/castello.jpg",
 };
@@ -25,19 +27,28 @@ function Orb({ size = 28, className = "", style }: { size?: number | string; cla
   return <span className={`orb ${className}`} style={{ width: dim, height: dim, ...style }} aria-hidden="true" />;
 }
 
-/* Logo ufficiale: wordmark COLLISIONI con la "O" a sfera */
-function Logo({ dark = false }: { dark?: boolean }) {
-  const color = dark ? "#ffffff" : "#3f4245";
+/* Logo ufficiale.
+   Usa il file reale se presente in /public:
+     - /logo.png        → versione per sfondo chiaro (testo scuro)
+     - /logo-white.png  → versione per sfondo scuro (testo bianco)
+   Se il file manca, mostra la ricostruzione CSS (wordmark + sfera). */
+function Logo({ dark = false, height = 38 }: { dark?: boolean; height?: number }) {
+  const [ok, setOk] = useState(true);
+  const src = dark ? "/logo-white.png" : "/logo.png";
   return (
     <a href="#top" className="flex items-center select-none" aria-label="Collisioni ETS — home">
-      <span className="leading-none">
-        <span className="logo-word" style={{ fontSize: "1.4rem", color }}>
-          C<Orb size="0.9em" />LLISIONI
+      {ok ? (
+        <img src={src} alt="Collisioni ETS" style={{ height, width: "auto", display: "block" }} onError={() => setOk(false)} />
+      ) : (
+        <span className="leading-none">
+          <span className="logo-word" style={{ fontSize: "1.4rem", color: dark ? "#ffffff" : "#3f4245" }}>
+            C<Orb size="0.9em" />LLISIONI
+          </span>
+          <span className="block" style={{ fontSize: "0.6rem", letterSpacing: "0.36em", fontWeight: 600, marginTop: 3, marginLeft: 1, color: dark ? "rgba(255,255,255,0.7)" : "var(--sea)" }}>
+            ETS · CARINI
+          </span>
         </span>
-        <span className="block" style={{ fontSize: "0.6rem", letterSpacing: "0.36em", fontWeight: 600, marginTop: 3, marginLeft: 1, color: dark ? "rgba(255,255,255,0.7)" : "var(--sea)" }}>
-          ETS · CARINI
-        </span>
-      </span>
+      )}
     </a>
   );
 }
@@ -269,8 +280,10 @@ function Ambiti() {
 /* ---- Progetti: bento con foto ---- */
 const PROGETTI = [
   { img: MEDIA.presepe, tone: "warm" as Tone, tag: "Evento · Natale", t: "Presepe Vivente Storico al Castello", d: "Un percorso emozionale tra le mura del Castello di Carini: personaggi in costume, antichi mestieri e scene di vita quotidiana. Oltre mille visitatori, con i gruppi Scout Carini 1 e Carini 2.", meta: ["26 dic · 1 gen · 6 gen", "Castello di Carini"], span: "b-3 b-tall" },
-  { img: MEDIA.carnevale, tone: "gold" as Tone, tag: "Evento · Borgo", t: "Festa del Carnevale Rinascimentale", d: "Il borgo medievale torna al Cinquecento: corteo in costume, musica e spettacolo.", meta: ["Carnevale"], span: "b-3" },
-  { img: MEDIA.anziani, tone: "sea" as Tone, tag: "Sociale · Rete", t: "Centro Anziani Attivi — Comunità in Rete", d: "Invecchiamento attivo: socialità, cultura e partecipazione in rete con il territorio.", meta: ["Invecchiamento attivo"], span: "b-3" },
+  { img: MEDIA.calici, tone: "night" as Tone, tag: "Evento · Estate", t: "Calici sotto le Stelle", d: "Degustazioni di vini siciliani nelle notti d'agosto, nella cornice del Castello di Carini, con tour del maniero sotto il cielo stellato.", meta: ["9 – 11 agosto", "Castello di Carini"], span: "b-3" },
+  { img: MEDIA.carnevale, tone: "gold" as Tone, tag: "Evento · Carnevale", t: "Gran Ballo del Carnevale Rinascimentale", d: "Una notte di incanto al Castello: corteo in costume, maschere e danze rinascimentali, in rete con le associazioni del territorio.", meta: ["14 febbraio", "Castello di Carini"], span: "b-3" },
+  { img: MEDIA.castellodivino, tone: "sea" as Tone, tag: "Festival · Vino", t: "Castello di…Vino", d: "Il festival del vino artigianale e della biodiversità vitivinicola siciliana: cantine, degustazioni e cultura enologica al Castello di Carini.", meta: ["9 – 11 maggio", "Sicilian Producer"], span: "b-3" },
+  { img: MEDIA.anziani, tone: "warm" as Tone, tag: "Sociale · Rete", t: "Centro Anziani Attivi — Comunità in Rete", d: "Invecchiamento attivo: socialità, cultura e partecipazione in rete con il territorio.", meta: ["Invecchiamento attivo"], span: "b-3" },
 ];
 function Progetti() {
   return (
@@ -441,7 +454,7 @@ function Footer() {
       <div className="container-x" style={{ paddingTop: 64, paddingBottom: 40 }}>
         <div className="grid md:grid-cols-3 gap-10">
           <div>
-            <Logo dark />
+            <Logo dark height={42} />
             <p className="mt-5 text-sm max-w-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Cultura, patrimonio e comunità a Carini. Dove le persone si incontrano.</p>
           </div>
           <div>
